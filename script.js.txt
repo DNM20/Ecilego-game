@@ -1,0 +1,43 @@
+// script.js
+let currentStation = 1;
+const results = [];
+
+function processStation(station) {
+    if (station !== currentStation) {
+        alert("Debes completar las estaciones en orden.");
+        return;
+    }
+
+    switch(station) {
+        case 1:
+            results.push("Estación 1: Brick insertado en el vaso.");
+            break;
+        case 2:
+            results.push("Estación 2: Segundo brick ensamblado y colocado en el vaso.");
+            break;
+        case 3:
+            results.push("Estación 3: Tercer brick ensamblado y tapa colocada.");
+            break;
+        case 4:
+            const qualityCheck = Math.random() > 0.1; // 90% probabilidad de éxito
+            if (qualityCheck) {
+                results.push("Estación 4: Control de calidad superado, vaso etiquetado.");
+            } else {
+                results.push("Estación 4: Fallo en el control de calidad, producto desechado.");
+            }
+            break;
+    }
+
+    updateResults();
+    currentStation = station === 4 ? 1 : station + 1;
+}
+
+function updateResults() {
+    const resultList = document.getElementById("result-list");
+    resultList.innerHTML = "";
+    results.forEach(result => {
+        const listItem = document.createElement("li");
+        listItem.textContent = result;
+        resultList.appendChild(listItem);
+    });
+}
